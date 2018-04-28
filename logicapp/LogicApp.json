@@ -1,0 +1,148 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "logicAppName": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 80,
+      "metadata": {
+        "description": "Name of the Logic App."
+      }
+    },
+    "webhookSubscribeEndpoint": {
+      "type": "string",
+      "defaultValue": "https://FUNCAPPNAME.azurewebsites.net/api/webhookhandler?code=FUNCTIONSTOKEN",
+      "metadata": {
+        "description": "HTTP Webhook Subscribe Endpoint URI (= webhookhandler functions endpoint include its functions token string)"
+      }
+    },
+    "slack_1_Connection_Name": {
+      "type": "string",
+      "defaultValue": "slack"
+    }
+  },
+  "variables": {
+     "logicAppLocation": "[resourceGroup().location]"
+  },
+  "resources": [
+    {
+      "name": "[parameters('logicAppName')]",
+      "type": "Microsoft.Logic/workflows",
+      "location": "[variables('logicAppLocation')]",
+      "tags": {
+        "displayName": "LogicApp"
+      },
+      "apiVersion": "2016-06-01",
+      "properties": {
+        "definition": {
+          "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+          "actions": {
+            "HTTP_Webhook_action_that_called_Database_Scaler_Functions": {
+              "type": "HttpWebhook",
+              "inputs": {
+                "subscribe": {
+                  "method": "POST",
+                  "uri": "[parameters('webhookSubscribeEndpoint')]",
+                  "body": {
+                    "CallbackUrl": "@listCallbackUrl()",
+                    "Context": "@{triggerBody()?['context']}"
+                  }
+                },
+                "unsubscribe": {}
+              },
+              "runAfter": {}
+            },
+            "Post_Success_message": {
+              "type": "ApiConnection",
+              "inputs": {
+                "host": {
+                  "connection": {
+                    "name": "@parameters('$connections')['slack']['connectionId']"
+                  }
+                },
+                "method": "post",
+                "path": "/chat.postMessage",
+                "queries": {
+                  "channel": "",
+                  "text": "Database scale change operation succeeded: @{triggerBody()?['context']['resourceId']}"
+                }
+              },
+              "runAfter": {
+                "HTTP_Webhook_action_that_called_Database_Scaler_Functions": [
+                  "Succeeded"
+                ]
+              }
+            },
+            "Post_Failure_message": {
+              "type": "ApiConnection",
+              "inputs": {
+                "host": {
+                  "connection": {
+                    "name": "@parameters('$connections')['slack']['connectionId']"
+                  }
+                },
+                "method": "post",
+                "path": "/chat.postMessage",
+                "queries": {
+                  "channel": "",
+                  "text": "Database scale change operation failed: @{triggerBody()?['context']['resourceId']}"
+                }
+              },
+              "runAfter": {
+                "HTTP_Webhook_action_that_called_Database_Scaler_Functions": [
+                  "Failed",
+                  "Skipped",
+                  "TimedOut"
+                ]
+              }
+            }
+          },
+          "parameters": {
+            "$connections": {
+              "defaultValue": {},
+              "type": "Object"
+            }
+          },
+          "triggers": {
+            "manual": {
+              "type": "Request",
+              "kind": "Http",
+              "inputs": {
+                "schema": {}
+              }
+            }
+          },
+          "contentVersion": "1.0.0.0",
+          "outputs": {}
+        },
+        "parameters": {
+          "$connections": {
+            "value": {
+              "slack": {
+                "id": "[concat(subscription().id, '/providers/Microsoft.Web/locations/', variables('logicAppLocation'), '/managedApis/', 'slack')]",
+                "connectionId": "[resourceId('Microsoft.Web/connections', parameters('slack_1_Connection_Name'))]",
+                "connectionName": "[parameters('slack_1_Connection_Name')]"
+              }
+            }
+          }
+        }
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/connections', parameters('slack_1_Connection_Name'))]"
+      ]
+    },
+    {
+      "type": "MICROSOFT.WEB/CONNECTIONS",
+      "apiVersion": "2016-06-01",
+      "name": "[parameters('slack_1_Connection_Name')]",
+      "location": "[variables('logicAppLocation')]",
+      "properties": {
+        "api": {
+          "id": "[concat(subscription().id, '/providers/Microsoft.Web/locations/', variables('logicAppLocation'), '/managedApis/', 'slack')]"
+        }
+      }
+    }
+  ],
+  "outputs": {}
+}

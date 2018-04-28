@@ -1,0 +1,25 @@
+#=============================================================
+# Azure Database Scaler App Configuration file
+#=============================================================
+# Commons
+ResourceGroup="RG-dbscalerapp"
+ResourceLocation="japanwest"
+SubscriptionId="87x7c7f9-0c9f-47d1-a856-1305a0cbfd7a"
+TenantId="72f988bf-x6f1-41af-91ab-2d7cd011db47"
+ClientId="333bfe4e-e98c-xd78-adb1-947d45296caa"
+ClientSecret="3d3f4303-ca12-4x29-94a7-e5bde0c1f8c1"
+
+# Functions App
+FunctionsAppName="dbscalerapp"
+FunctionsAppConsumptionPlanLocation="japanwest"
+WebhookSubscribeAPIEndpoint="https://dbscalerapp.azurewebsites.net/api/webhookhandler?code=CfXJ8AAAAAAAAAAAAAAAAAAAAACnNVJnl3Zg50cIzOrLVaXwfasZomHH1QB0hXLf984w1XtSo86ARM1EfcTr0H-lB2GFCdo6uiE-XAXjhcqHxleia5AbN3D8AVOzULvB2_Ko7ndHiE9W5Jk1ub-11gGzaCnFRa7G60HfX3BTRaANweIsm42eyrvDzeks6dQbuhFVKw"
+
+# Logic App
+LogicAppName="dbscalerapp"
+
+# Storage Account for the App
+StorageAccountName="dbscalerapp"
+
+# Database Admin/Login User in Azure Database Services (MySQL/PostgreSQL)
+DatabaseAdminUser="dbadmin"
+DatabaseAdminPassword="P@ssw0rd____"
