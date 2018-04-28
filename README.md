@@ -3,7 +3,7 @@ Event driven Logic App and Functions that scale-up or scale-down the capacity of
 
 
 ## How to deploy the scaler app
-- [How to deploy the database scaler app](../docs/HOW-TO-DEPLOY-APP.md)
+- [How to deploy the database scaler app](./docs/HOW-TO-DEPLOY-APP.md)
 
 ## How to setup autoscale trigger
-- [How to setup Azure Alerts for Azure Database to archieve autoscaling](../docs/HOW-TO-SETUP-ALERTS.md)
+- [How to setup Azure Alerts for autoscaling Azure Database Services](./docs/HOW-TO-SETUP-ALERTS.md)
