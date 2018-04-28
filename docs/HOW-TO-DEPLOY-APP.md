@@ -10,6 +10,9 @@ pip install -U azure-cli
 ```
 [NOTE] you can skip azure-cli installation if you execute bash commands from [Azure Cloud Shell](https://docs.microsoft.com/en-us/azure/cloud-shell/overview). I recommend you to use [Azure Cloud Shell Bash](https://docs.microsoft.com/en-us/azure/cloud-shell/overview) as it's browser based and you can run anywhere
 
+![](../images/azure-cloud-shell-bash.png)
+
+
 ## Create Resources and Deploy applications
 
 ### 1. Create Resource Group
@@ -93,7 +96,7 @@ Get the following functions' URLs (scheme + host/path + query) in the Azure Port
 - webhookhandler
 
 Here is how you get get-sas-token function's URL.
-![](../images/screenshot-functions-url.png)
+![](../images/webhookhandler-url.png)
 
 Once you get `webhookhandler` function URL, replace `WebhookSubscribeAPIEndpoint` value with `webhookhandler` function URL in `project.conf` like this:
 ```
@@ -107,5 +110,6 @@ Create Azure Logic App Account and deploy a workflow to the account by running a
 scripts/setup-logicapp.sh
 ```
 
-### 8. Configure Connection to your Slack account
+### 8. Authorize the logic app to access your Slack account
 
+![](../images/slack-authorization-steps.png)
