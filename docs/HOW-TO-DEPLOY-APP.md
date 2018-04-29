@@ -46,7 +46,7 @@ Clone the project source code from Github
 git clone https://github.com/yokawasa/azure-database-scaler.git
 ```
 
-Then, open `project.conf` and add all except `WebhookSubscribeAPIEndpoint` parameters in project.conf.
+Then, open `project.conf` and add all except `WebhookSubscribeAPIEndpoint` parameters in project.conf (Sample file -  [project.conf.example](../scripts/project.conf.example))
 - azure-database-scaler/scripts/[project.conf](../scripts/project.conf)
 ```
 #=============================================================
