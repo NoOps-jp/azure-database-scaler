@@ -41,6 +41,9 @@
             "HTTP_Webhook_action_that_called_Database_Scaler_Functions": {
               "type": "HttpWebhook",
               "inputs": {
+                "retryPolicy": {
+                    "type": "none"
+                },
                 "subscribe": {
                   "method": "POST",
                   "uri": "[parameters('webhookSubscribeEndpoint')]",
@@ -50,6 +53,9 @@
                   }
                 },
                 "unsubscribe": {}
+              },
+              "limit": {
+                "timeout": "PT10M"
               },
               "runAfter": {}
             },
