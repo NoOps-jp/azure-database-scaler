@@ -20,7 +20,7 @@ Event driven Azure Logic App & Functions App that scale-up or scale-down the cap
     - General Purpose Tier: 5 GB to 2 TB (2048 GB)
     - Memory Optimized Tier: 5 GB to 2 TB (2048 GB)
 
-### Alert Metrics, Alert Operator, and Actions
+### Alert Metrics, Alert Operator, and Actions to be triggered
 
 |Alert Metric|Metric display name | Operators to match | Action |
 |---|---|---|---|
@@ -41,7 +41,6 @@ Relevant Services:
 - [Azure Functions](https://azure.microsoft.com/en-us/services/functions/)
 - [Azure Logic Apps](https://azure.microsoft.com/en-us/services/logic-apps/)
 - [Azure Monitor Alerts (Classic)](https://docs.microsoft.com/en-us/azure/monitoring-and-diagnostics/monitoring-overview-alerts)
-- [Azure Monitor Alerts (New)](https://docs.microsoft.com/en-us/azure/monitoring-and-diagnostics/monitoring-overview-unified-alerts)
 - [Slack (for notification)](https://slack.com)
 
 ## Documents
