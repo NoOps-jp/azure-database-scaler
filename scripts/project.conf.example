@@ -20,6 +20,13 @@ LogicAppName="dbscalerapp"
 # Storage Account for the App
 StorageAccountName="dbscalerapp"
 
-# Database Admin/Login User in Azure Database Services (MySQL/PostgreSQL)
+# Azure Database Services (MySQL/PostgreSQL) Info
+DatabaseLocation="japanwest"
+DatabaseResourceGroup="rg-dbscalerapp"
+DatabaseAccountName="mysqldemodb001"
 DatabaseAdminUser="dbadmin"
 DatabaseAdminPassword="P@ssw0rd____"
+
+# Threshold for Alert
+MaxStorageScaleLimit="2048"
+StorageScaleupSize="100"

@@ -22,8 +22,13 @@ SUBSCRIPTION_ID=$SubscriptionId
 SP_TENANT_ID=$TenantId
 SP_CLIENT_ID=$ClientId
 SP_CLIENT_SECRET=$ClientSecret
+DB_LOCATION=$DatabaseLocation
+DB_RESOURCE_GROUP=$DatabaseResourceGroup
+DB_NAME=$DatabaseAccountName
 DB_ADMIN_USER=$DatabaseAdminUser
 DB_ADMIN_PASSWORD=$DatabaseAdminPassword
+MAX_STORAGE_SCALE_LIMIT=$MaxStorageScaleLimit
+STORAGE_SCALEUP_SIZE=$StorageScaleupSize
 
 # Create Functions App (Consumption Plan)
 az functionapp create --name $FUNCTIONS_APP_NAME \
@@ -51,5 +56,10 @@ az webapp config appsettings set \
     AZURE_CLIENT_SECRET=$SP_CLIENT_SECRET \
     AZURE_SUBSCRIPTION_ID=$SUBSCRIPTION_ID \
     STORAGE_CONNECTION="DefaultEndpointsProtocol=https;AccountName=$STORAGE_ACCOUNT_NAME;AccountKey=$STORAGE_ACCESS_KEY;EndpointSuffix=core.windows.net" \
+    DB_LOCATION=$DB_LOCATION \
+    DB_RESOURCE_GROUP=$DB_RESOURCE_GROUP \
+    DB_NAME=$DB_NAME \
     DB_ADMIN_USER=$DB_ADMIN_USER \
-    DB_ADMIN_PASSWORD=$DB_ADMIN_PASSWORD
+    DB_ADMIN_PASSWORD=$DB_ADMIN_PASSWORD \
+    MAX_STORAGE_SCALE_LIMIT=$MAX_STORAGE_SCALE_LIMIT \
+    STORAGE_SCALEUP_SIZE=$STORAGE_SCALEUP_SIZE
