@@ -1,6 +1,8 @@
 #=============================================================
 # Azure Database Scaler App Configuration file
 #=============================================================
+# NOTE: Never put spaces between KEY=VALUE!
+
 # Commons
 ResourceGroup="RG-dbscalerapp"
 ResourceLocation="japanwest"
