@@ -1,5 +1,5 @@
 # azure-database-scaler
-Event driven Azure Logic App & Functions App that scale-up or scale-down the capacity of your Azure database service instance (Currently only vCore # is supported)
+Event driven Azure Logic App & Functions App that scale-up or scale-down the capacity of your Azure database service instance
 
 ### Targets Azure Databases to scale in this project:
 - [Azure Database for MySQL](https://azure.microsoft.com/en-us/services/mysql/)
